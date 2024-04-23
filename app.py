@@ -74,7 +74,7 @@ def handle_submission(submission_type, input_text, uploaded_file):
       pdf_text = ""
       for page in pdf_reader.pages:
         pdf_text += page.extract_text()
-except Exception as e:
+  except Exception as e:
     st.error(f"Failed to process the uploaded PDF: {e}")
     return
 
