@@ -16,25 +16,25 @@ _Libraries:_
 **Large Language Model:** _Google GenerativeAI (Gemini Vision Pro)_
 
 **How the app works**
-![[flowchart.png]]
+![[FlowChart.png]]
 
 
 **Advantages**
 > **Automated Analysis:** Saves time and effort compared to manual resume review.
-> **Data-Driven Insights:** Uses Gemini Vision Pro's understanding of language for detailed analysis.
+> **Data-Driven Insights:** Uses Gemini Vision Pro's understanding of the language for detailed analysis.
 > **Actionable Feedback:** Identifies strengths, weaknesses, and missing skills to improve your resume and job candidacy.
 > **User-Friendly Interface**: Streamlit provides a user-friendly platform for interaction.
 
 **Limitations**
 
 > **Model Dependence:** Relies on the accuracy and capabilities of Gemini Vision Pro.
-> **Data Quality:** Relies on the quality of the provided job description and resume text.
-> **Limited Context Understanding:** May not fully grasp the nuances and context of skills and experience, and it halucinates.
+> **Data Quality:** Relies on the provided job description and resume text quality.
+> **Limited Context Understanding:** May not fully grasp the nuances and context of skills and experience, and it hallucinates.
 > **Emerging Technology:** Large language models are still under development and might have limitations.
 
 **Future Scope and Developments**
 > **Skill Extraction and Matching:** Integrate libraries like spaCy or nltk for advanced skill extraction and matching between job description and resume.
-> **Contextual Analysis:** Explore techniques like TF-IDF to analyze the weightage of keywords within the context of the job and resume.
+> **Contextual Analysis:** Explore techniques like TF-IDF to analyze keywords' weightage within the job and resume context.
 > **Feedback Loop and Model Improvement:** Implement user feedback mechanisms to improve the application's accuracy and effectiveness over time.
 > **Multilingual Support:** Explore expanding the application to support resume and job description analysis in multiple languages.
 
@@ -42,5 +42,5 @@ _**About the Developer**_
 This project was developed by **Sriram Ramakrishnan**. 
 You can find more information about the developer through the following links:
 
-_**LinkedIn Profile:**_ [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sriram-aiexpert/)]
-_**GitHub Profile:**_ [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Sriram-atgithub)]
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sriram-aiexpert/)]
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Sriram-atgithub)]
