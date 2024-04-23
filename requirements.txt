@@ -2,8 +2,4 @@ streamlit
 google-generativeai
 python-dotenv
 pdf2image
-os-sys
 pillow
-pybase64
-Python-IO
-python-poppler
