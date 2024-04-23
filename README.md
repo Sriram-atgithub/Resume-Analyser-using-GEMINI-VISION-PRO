@@ -16,7 +16,7 @@ _Libraries:_
 **Large Language Model:** _Google GenerativeAI (Gemini Vision Pro)_
 
 **How the app works**
-![Process Flow]()
+![Process Flow](https://github.com/Sriram-atgithub/ATS-Tracking-System-with-Gemini/blob/main/Flowchart.png)
 
 
 **Advantages**
