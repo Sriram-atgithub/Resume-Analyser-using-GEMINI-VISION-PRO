@@ -1,9 +1,7 @@
-  # Import the necessary libraries
+# Import the necessary libraries
 from dotenv import load_dotenv
 import streamlit as st
 import os
-from PIL import Image
-import pdf2image
 import google.generativeai as genai
 import base64
 import io
@@ -20,37 +18,10 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 def get_gemini_response(input_text, pdf_content, prompt):
     try:
         model = genai.GenerativeModel('gemini-pro-vision')
-        response = model.generate_content([input_text, pdf_content[0], prompt])
+        response = model.generate_content([input_text, pdf_content, prompt])
         return response.text
     except Exception as e:
         st.error(f"An error occurred: {e}")
-        return None
-
-# Function to set up input PDF
-def input_pdf_setup(uploaded_file):
-    if uploaded_file is not None:
-        try:
-            # Convert PDF to image
-            images = pdf2image.convert_from_bytes(uploaded_file.read())
-            first_page = images[0]
-
-            # Convert to bytes
-            img_byte_arr = io.BytesIO()
-            first_page.save(img_byte_arr, format='JPEG')
-            img_byte_arr = img_byte_arr.getvalue()
-
-            pdf_parts = [
-                {
-                    "mime_type": "image/jpeg",
-                    "data": base64.b64encode(img_byte_arr).decode()  # Encode to base64
-                }
-            ]
-            return pdf_parts
-        except Exception as e:
-            st.error(f"An error occurred while processing the PDF: {e}")
-            return None
-    else:
-        st.warning("Please upload a PDF file.")
         return None
 
 # Streamlit UI setup
@@ -59,7 +30,6 @@ st.set_page_config(page_title="ATS Resume Expert")
 st.sidebar.markdown("## Resume Analyser - Gemini Vision Pro 📄🔎")
 
 st.sidebar.button("Menu Bar")
-
 
 # Main page (About the App)
 def about_app():
@@ -85,16 +55,6 @@ def about_app():
         state.submission_type = 3
 
     if "submission_type" in state:
-        progress_bar = st.progress(0)
-        progress_message = st.empty()
-        for percent_complete in range(101):
-            progress_bar.progress(percent_complete)
-            progress_message.text(f"Analysis Progress: {percent_complete}%")
-            # Simulate some processing time
-            time.sleep(0.03)
-        progress_bar.empty()
-        progress_message.empty()
-
         handle_submission(state.submission_type, input_text, uploaded_file)
 
 
@@ -103,32 +63,31 @@ def handle_submission(submission_type, input_text, uploaded_file):
         st.warning("Please upload the resume 📤")
         return
 
-    pdf_content = input_pdf_setup(uploaded_file)
+    pdf_content = uploaded_file.read()  # Read PDF content directly
     if pdf_content is None:
         st.warning("Failed to process the uploaded PDF.❌")
         return
 
     input_prompts = {
-    1: """
-    You are a hiring manager with expertise in data science, full-stack web development, big data engineering, devops, or data analysis.
-    Review the provided resume against the job description. Evaluate whether the candidate's profile aligns with the role.
-    Provide your evaluation highlighting the candidate's strengths as "Your Strengths" and weaknesses as "Weaknesses" in relation to the specified job requirements.
-    """,
-    2: """
-    Identify the missing keywords in the resume compared to the job description and list them as the missing skills.
-    """,
-    3: """
-    You are an experienced ATS (Applicant Tracking System) scanner with a deep understanding of data science and ATS functionality.
-    Evaluate the resume against the provided job description. Provide the percentage match if the resume aligns with the job description.
-    Present the output in the following format: 
-    - **Candidate Name**: [Candidate Name]
-    - **Profile Match**: [Job match by analysing job description and resume and give it in percentage]
-    - **Skills you already have**: [matched keywords and with similar context keywords by finding it from job description and resume]
-    - **The skills that you miss**: [missing keywords and with similar context keywords from job description and resume]
-    - **Final thoughts**: [bullet points with candidate name and percentage match and with similar context keywords from job description and resume]
-    """
-}
-
+        1: """
+        You are a hiring manager with expertise in data science, full-stack web development, big data engineering, devops, or data analysis.
+        Review the provided resume against the job description. Evaluate whether the candidate's profile aligns with the role.
+        Provide your evaluation highlighting the candidate's strengths as "Your Strengths" and weaknesses as "Weaknesses" in relation to the specified job requirements.
+        """,
+        2: """
+        Identify the missing keywords in the resume compared to the job description and list them as the missing skills.
+        """,
+        3: """
+        You are an experienced ATS (Applicant Tracking System) scanner with a deep understanding of data science and ATS functionality.
+        Evaluate the resume against the provided job description. Provide the percentage match if the resume aligns with the job description.
+        Present the output in the following format: 
+        - **Candidate Name**: [Candidate Name]
+        - **Profile Match**: [Job match by analysing job description and resume and give it in percentage]
+        - **Skills you already have**: [matched keywords and with similar context keywords by finding it from job description and resume]
+        - **The skills that you miss**: [missing keywords and with similar context keywords from job description and resume]
+        - **Final thoughts**: [bullet points with candidate name and percentage match and with similar context keywords from job description and resume]
+        """
+    }
 
     response = get_gemini_response(input_text, pdf_content, input_prompts[submission_type])
     if response is not None:
@@ -150,7 +109,6 @@ def about_the_app():
     st.markdown(" - It analyse the resume to give tailored insights on the job that a person wants to apply")
     st.image("Flowchart.png", caption="App Working Process")
     st.sidebar.markdown("Navigate through the other pages to know more the app, documentation and developer 🔎")
-    
 
 def documentation():
     st.subheader("Resume Analyser using GEMINI VISION PRO")
@@ -161,7 +119,6 @@ def documentation():
     st.markdown("[Python dotenv Documentation](https://pypi.org/project/python-dotenv/)")
     st.markdown("[Pdf2image Documentation](https://pypi.org/project/pdf2image/)")
     st.sidebar.markdown("Navigate through the other pages to know more the app, documentation and developer 🔎")
-
 
 # About the Author page
 def about_developer():
@@ -177,7 +134,7 @@ def about_developer():
 
 # Run the app
 if __name__ == "__main__":
-    page = st.sidebar.radio("Sections",["Home page 🏠" , "About the app 💻","Documentation 📒", "About the developer 👨‍💻"])
+    page = st.sidebar.radio("Sections", ["Home page 🏠", "About the app 💻", "Documentation 📒", "About the developer 👨‍💻"])
     if page == "Home page 🏠":
         about_app()
     elif page == "About the app 💻":
