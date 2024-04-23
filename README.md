@@ -1,5 +1,7 @@
 ## Resume Analyser with Gemini Vision Pro
-### This project is a web application designed to analyze resumes and provide insights for job seekers. It leverages the power of Google's Generative AI model, Gemini Vision Pro, to extract valuable information and identify strengths, weaknesses, and missing skills with a specific job description.
+This project is a web application designed to analyze resumes and provide insights for job seekers. 
+It leverages the power of Google's Generative AI model, Gemini Vision Pro, to extract valuable information and 
+identify strengths, weaknesses, and missing skills with a specific job description.
 
 **Dependencies**
 _Libraries:_
