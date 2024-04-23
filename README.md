@@ -11,9 +11,9 @@ _Libraries:_
 > - Google GenerativeAI: Provides access to the Gemini Vision Pro model.
 
 **Tech Stack**
-**Frontend:** _Streamlit_
-**Backend:** _Python_
-**Large Language Model:** _Google GenerativeAI (Gemini Vision Pro)_
+- **Frontend:** _Streamlit_
+- **Backend:** _Python_
+- **Large Language Model:** _Google GenerativeAI (Gemini Vision Pro)_
 
 **How the app works**
 ![Process Flow](https://github.com/Sriram-atgithub/ATS-Tracking-System-with-Gemini/blob/main/Flowchart.png)
