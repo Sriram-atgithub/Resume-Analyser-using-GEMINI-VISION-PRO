@@ -6,4 +6,4 @@ os-sys
 pillow
 pybase64
 Python-IO
-pdftoppm
+python-poppler
