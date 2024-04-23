@@ -115,16 +115,17 @@ def handle_submission(submission_type, input_text, uploaded_file):
     Provide your evaluation highlighting the candidate's strengths as "Your Strengths" and weaknesses as "Weaknesses" in relation to the specified job requirements.
     """,
     2: """
-    Identify the missing keywords in the resume compared to the job description and list them as the missing skills in bullet points.
+    Identify the missing keywords in the resume compared to the job description and list them as the missing skills.
     """,
     3: """
     You are an experienced ATS (Applicant Tracking System) scanner with a deep understanding of data science and ATS functionality.
     Evaluate the resume against the provided job description. Provide the percentage match if the resume aligns with the job description.
     Present the output in the following format: 
-    - Percentage Match: [percentage]
-    - Skills you already have: [matched keywords]
-    - The skills that you miss: [missing keywords]
-    - Final thoughts: [bullet points with candidate name and percentage match]
+    - **Candidate Name**: [Candidate Name]
+    - **Profile Match**: [Job match by analysing job description and resume and give it in percentage]
+    - **Skills you already have**: [matched keywords and with similar context keywords by finding it from job description and resume]
+    - **The skills that you miss**: [missing keywords and with similar context keywords from job description and resume]
+    - **Final thoughts**: [bullet points with candidate name and percentage match and with similar context keywords from job description and resume]
     """
 }
 
