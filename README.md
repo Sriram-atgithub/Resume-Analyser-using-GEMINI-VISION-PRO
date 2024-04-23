@@ -16,7 +16,7 @@ _Libraries:_
 **Large Language Model:** _Google GenerativeAI (Gemini Vision Pro)_
 
 **How the app works**
-![[FlowChart.png]]
+![Process Flow]()
 
 
 **Advantages**
