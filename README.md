@@ -1,5 +1,5 @@
-### Resume Analyser with Gemini Vision Pro
-#### This project is a web application designed to analyze resumes and provide insights for job seekers. It leverages the power of Google's Generative AI model, Gemini Vision Pro, to extract valuable information and identify strengths, weaknesses, and missing skills in relation to a specific job description.
+## Resume Analyser with Gemini Vision Pro
+### This project is a web application designed to analyze resumes and provide insights for job seekers. It leverages the power of Google's Generative AI model, Gemini Vision Pro, to extract valuable information and identify strengths, weaknesses, and missing skills with a specific job description.
 
 **Dependencies**
 _Libraries:_
@@ -8,7 +8,7 @@ _Libraries:_
 > - genai: Interface to interact with Google GenerativeAI for Gemini Vision Pro.
 > - pdf2image (Optional): Used for converting uploaded PDF resumes to images for processing by Gemini.
 **External Services:**
-> - Google GenerativeAI: Provides access to Gemini Vision Pro model.
+> - Google GenerativeAI: Provides access to the Gemini Vision Pro model.
 
 **Tech Stack**
 **Frontend:** _Streamlit_
@@ -42,5 +42,5 @@ _**About the Developer**_
 This project was developed by **Sriram Ramakrishnan**. 
 You can find more information about the developer through the following links:
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sriram-aiexpert/)]
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Sriram-atgithub)]
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sriram-aiexpert/)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Sriram-atgithub)
