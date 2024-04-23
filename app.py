@@ -11,62 +11,72 @@ from streamlit import session_state as state
 # Load environment variables
 load_dotenv()
 
-# Configure GenerativeAI
+# Configure GenerativeAI (assuming API key is set in environment variables)
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
-# Function to get Gemini response
-def get_gemini_response(input_text, pdf_content, prompt):
-    try:
-        model = genai.GenerativeModel('gemini-pro-vision')
-        response = model.generate_content([input_text, pdf_content, prompt])
-        return response.text
-    except Exception as e:
-        st.error(f"An error occurred: {e}")
-        return None
+# Function to get Gemini response (assuming text extraction from PDF)
+def get_gemini_response(input_text, pdf_text, prompt):
+  try:
+    model = genai.GenerativeModel('gemini-pro-vision')
+    response = model.generate_content([input_text, pdf_text, prompt])
+    return response.text
+  except Exception as e:
+    st.error(f"An error occurred: {e}")
+    return None
 
 # Streamlit UI setup
 st.set_page_config(page_title="ATS Resume Expert")
 
-st.sidebar.markdown("## Resume Analyser - Gemini Vision Pro 📄🔎")
+st.sidebar.markdown("## Resume Analyser - Gemini Vision Pro ")
 
 st.sidebar.button("Menu Bar")
 
 # Main page (About the App)
 def about_app():
-    st.header("Resume Analyser using GEMINI VISION PRO LLM")
-    st.subheader("Home Page 🏠")
-    st.sidebar.markdown("Navigate through the other pages to know more the app, documentation and developer 🔎")
+  st.header("Resume Analyser using GEMINI VISION PRO LLM")
+  st.subheader("Home Page ")
+  st.sidebar.markdown("Navigate through the other pages to know more the app, documentation and developer ")
 
-    input_text = st.text_area("Job Description 📜:", key="input", height=50, help="Enter the job description to analyze.")
-    uploaded_file = st.file_uploader("Upload your resume in PDF format 📑", type=["pdf"], help="Upload your resume in PDF format.")
+  input_text = st.text_area("Job Description :", key="input", height=50, help="Enter the job description to analyze.")
+  uploaded_file = st.file_uploader("Upload your resume in PDF format ", type=["pdf"], help="Upload your resume in PDF format.")
 
-    st.markdown(" > Use the functionalities to find out variour aspects of the resume.")
+  st.markdown(" > Use the functionalities to find out variour aspects of the resume.")
 
-    if uploaded_file is not None:
-        st.write("Resume Uploaded successfully!✅")
+  if uploaded_file is not None:
+    st.write("Resume Uploaded successfully!✅")
 
-    if st.button("Resume analysis 📊", help="Help you to find out your strenghts and weeknesses for the Job"):
-        state.submission_type = 1
+  if st.button("Resume analysis ", help="Help you to find out your strenghts and weeknesses for the Job"):
+    state.submission_type = 1
 
-    if st.button("The missing skills 📉", help="Help you to find out the missing skills required for the Job"):
-        state.submission_type = 2
+  if st.button("The missing skills ", help="Help you to find out the missing skills required for the Job"):
+    state.submission_type = 2
 
-    if st.button("Profile match(%)🎯", help="Help you to find out your profile match in % with job description for the Job"):
-        state.submission_type = 3
+  if st.button("Profile match(%)", help="Help you to find out your profile match in % with job description for the Job"):
+    state.submission_type = 3
 
-    if "submission_type" in state:
-        handle_submission(state.submission_type, input_text, uploaded_file)
+  if "submission_type" in state:
+    handle_submission(state.submission_type, input_text, uploaded_file)
 
 
 def handle_submission(submission_type, input_text, uploaded_file):
-    if uploaded_file is None:
-        st.warning("Please upload the resume 📤")
-        return
+  if uploaded_file is None:
+    st.warning("Please upload the resume ")
+    return
 
-    pdf_content = uploaded_file.read()  # Read PDF content directly
-    if pdf_content is None:
-        st.warning("Failed to process the uploaded PDF.❌")
-        return
+  # Access filename using `name` attribute
+  pdf_filename = uploaded_file.name
+
+  # Text extraction (consider error handling and alternative libraries if PyPDF2 unsupported)
+  try:
+    import PyPDF2
+    with open(uploaded_file.name, "rb") as f:
+      pdf_reader = PyPDF2.PdfReader(f)
+      pdf_text = ""
+      for page in pdf_reader.pages:
+        pdf_text += page.extract_text()
+except Exception as e:
+    st.error(f"Failed to process the uploaded PDF: {e}")
+    return
 
     input_prompts = {
         1: """
